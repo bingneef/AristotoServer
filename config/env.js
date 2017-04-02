@@ -1,11 +1,10 @@
-jsonfile = require('jsonfile');
+/* global __TEST__ */
+const path      = require('path');
+const jsonfile = require('jsonfile');
 
-file = __dirname + '/env.json';
-if ( typeof __TEST__ !== 'undefined' && __TEST__ ) {
-  file = __dirname + '/env-test.json';
+var dbConfig = jsonfile.readFileSync(path.join(__dirname, '/env.json'));
+if (typeof __TEST__ !== 'undefined' && __TEST__) {
+  dbConfig = jsonfile.readFileSync(path.join(__dirname, '/env-test.json'));
 }
 
-env = jsonfile.readFileSync(file);
-
-
-module.exports = env
+module.exports = dbConfig;

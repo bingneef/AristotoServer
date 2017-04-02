@@ -1,3 +1,5 @@
+/* eslint-env node, jest */
+
 const UserSerializer = require('./UserSerializer');
 const UserFactory = require('../spec/factory/UserFactory')
 const sequelize = require('../databaseConnection')

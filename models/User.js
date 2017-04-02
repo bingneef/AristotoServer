@@ -1,10 +1,8 @@
 const Sequelize = require('sequelize');
 const database = require('../databaseConnection');
 const SequelizeTokenify = require('sequelize-tokenify');
-const env = require('../config/env');
-const crypto = require('crypto');
 
-User = database.define('users',
+var User = database.define('users',
   {
     id: {
       type: Sequelize.INTEGER,

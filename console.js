@@ -1,12 +1,9 @@
 require('app-module-path').addPath(__dirname);
 
-const path      = require('path');
-const models    = require('./models');
-
 const repl = require('repl');
 const babel = require('babel-core');
 
-function preprocess(input) {
+var preprocess = (input) => {
   const awaitMatcher = /^(?:\s*(?:(?:let|var|const)\s)?\s*([^=]+)=\s*|^\s*)(await\s[\s\S]*)/;
   const asyncWrapper = (code, binder) => {
     let assign = binder ? `global.${binder} = ` : '';
@@ -21,23 +18,21 @@ function preprocess(input) {
   return input;
 }
 
-function myEval(cmd, context, filename, callback) {
+const replInstance = repl.start({ prompt: '> ' });
+const _eval = replInstance.eval;
+
+replInstance.eval = (cmd, context, filename, callback) => {
   const code = babel.transform(preprocess(cmd), {
     presets: ['es2015', 'stage-3'],
     plugins: [
-      ["transform-runtime", {
-        "regenerator": true
+      ['transform-runtime', {
+        'regenerator': true
       }]
     ]
   }).code;
   _eval(code, context, filename, callback);
-}
-
-
-const replInstance = repl.start({ prompt: '> ' });
-const _eval = replInstance.eval;
-replInstance.eval = myEval;
+};
 
 // Load my app
-const app = require('./app')
+const app = require('./app');
 replInstance.context.app = app;

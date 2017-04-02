@@ -21,8 +21,8 @@ module.exports = {
         userId: {
           type: Sequelize.INTEGER,
           references: {
-              model: 'users',
-              key: 'id'
+            model: 'users',
+            key: 'id'
           }
         },
         createdAt: {
@@ -40,6 +40,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-   queryInterface.dropTable('oauths');
+    queryInterface.dropTable('oauths');
   }
 };

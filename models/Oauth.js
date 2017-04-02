@@ -1,8 +1,8 @@
-const
-  Sequelize = require('sequelize'),
-  database = require('../databaseConnection');
+const Sequelize = require('sequelize');
+const database = require('../databaseConnection');
+const User = require('./index').User;
 
-Oauth = database.define('oauth',
+var Oauth = database.define('oauth',
   {
     id: {
       type: Sequelize.INTEGER,

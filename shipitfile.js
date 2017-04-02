@@ -22,7 +22,7 @@ module.exports = function (shipit) {
           'config/config.json',
           'config/env.json',
           'app.json'
-        ],
+        ]
       }
     },
     staging: {
@@ -37,21 +37,19 @@ module.exports = function (shipit) {
     }
   });
 
-  shipit.blTask('db:migrate', function() {
+  shipit.blTask('db:migrate', () => {
     return shipit.remote('cd ' + shipit.config.deployTo + '/current && npm run db:migrate');
   });
 
-  shipit.on('published', function() {
+  shipit.on('published', () => {
     return shipit.start('db:migrate');
   });
 
-  shipit.blTask('clean-up', function() {
+  shipit.blTask('clean-up', () => {
     return shipit.local('rm -r tmp');
   });
 
-  shipit.on('finished', function() {
+  shipit.on('finished', () => {
     return shipit.start('clean-up');
   });
 };
-
-

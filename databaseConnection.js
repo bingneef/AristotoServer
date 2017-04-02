@@ -2,9 +2,9 @@ const Sequelize = require('sequelize');
 const dbCredentials = require('./config/dbConfig');
 const SequelizeToJson = require('sequelize-to-json');
 
-sequelize = new Sequelize(
-  dbCredentials.database, 
-  dbCredentials.username, 
+var sequelize = new Sequelize(
+  dbCredentials.database,
+  dbCredentials.username,
   dbCredentials.password,
   {
     host: 'localhost',
@@ -12,7 +12,7 @@ sequelize = new Sequelize(
     pool: {
       max: 5,
       min: 0,
-      idle: 10000,
+      idle: 10000
     },
     define: {
       classMethods: {
@@ -31,11 +31,11 @@ sequelize = new Sequelize(
 
 sequelize
   .authenticate()
-  .then( () => {
+  .then(() => {
     console.log('Connection with database established');
   })
-  .catch( (err) => {
+  .catch((err) => {
     console.log('Error connecting to the database: ' + err);
   });
 
-module.exports = sequelize
+module.exports = sequelize;

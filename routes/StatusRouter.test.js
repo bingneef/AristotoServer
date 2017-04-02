@@ -1,3 +1,5 @@
+/* eslint-env node, jest */
+
 const statusRouter = require('./StatusRouter');
 
 test('StatusRouter Is Exported', () => {
