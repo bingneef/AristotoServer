@@ -1,0 +1,8 @@
+{
+  "username": "root",
+  "password": null,
+  "database": "aristoto-test",
+  "host": "127.0.0.1",
+  "dialect": "sqlite"
+}
+
