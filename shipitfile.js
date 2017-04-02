@@ -7,11 +7,11 @@ module.exports = function (shipit) {
   shipit.initConfig({
     default: {
       workspace: 'tmp',
-      repositoryUrl: 'git@github.com:sping/abcd-electronic-fussball.git',
+      repositoryUrl: 'git@github.com:bingneef/AristotoServer.git',
       ignores: ['.git', 'node_modules'],
       keepReleases: 10,
       shallowClone: true,
-      dirToCopy: '/',
+      dirToCopy: '',
       npm: {
         remote: true,
         installFlags: ['--only=production']
@@ -27,12 +27,12 @@ module.exports = function (shipit) {
     },
     staging: {
       branch: 'develop',
-      deployTo: '/var/api/aristoto-staging',
+      deployTo: '/var/www/aristoto-api-staging',
       servers: 'bing@5.157.85.46'
     },
     production: {
       branch: 'master',
-      deployTo: '/var/api/aristoto-production',
+      deployTo: '/var/www/aristoto-api',
       servers: 'bing@5.157.85.46'
     }
   });
@@ -43,6 +43,14 @@ module.exports = function (shipit) {
 
   shipit.on('published', function() {
     return shipit.start('db:migrate');
+  });
+
+  shipit.blTask('clean-up', function() {
+    return shipit.local('rm -r tmp');
+  });
+
+  shipit.on('finished', function() {
+    return shipit.start('clean-up');
   });
 };
 
