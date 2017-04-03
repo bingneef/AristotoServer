@@ -10,6 +10,7 @@ module.exports = {
     'no-multi-spaces': 0,
     'comma-dangle': 0,
     'space-before-function-paren': 0,
-    'ignore-trailing-comments': 0 
+    'ignore-trailing-comments': 0,
+    'no-param-reassign': 0
   }
 }
