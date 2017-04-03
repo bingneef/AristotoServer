@@ -2,7 +2,7 @@
 const statusController = require('../../controllers/StatusController');
 
 it('Get status return {alive: true}', async () => {
-  var ctx = {}
+  const ctx = {}
   await statusController.getStatus(ctx)
   expect(ctx.status).toBe(200)
   expect(ctx.body.alive).toEqual(true)
