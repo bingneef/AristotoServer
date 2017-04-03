@@ -30,6 +30,7 @@
     "db:rollback": "node_modules/.bin/sequelize db:migrate:undo",
     "test": "npm run lint && node_modules/jest/bin/jest.js --runInBand --forceExit --silent",
     "send-coverage": "cat ./coverage/lcov.info | node_modules/.bin/codacy-coverage -p .",
+    "deploy:staging": "node_modules/shipit-cli/bin/shipit staging deploy",
     "deploy:production": "node_modules/shipit-cli/bin/shipit production deploy",
     "lint": "node_modules/eslint/bin/eslint.js *.js **/*.js __**__/**/*.js"
   },
