@@ -2,5 +2,6 @@
   "secret": "bogus",
   "frontEndOrigin": "http://localhost:8080",
   "serverOrigin": "http://localhost:5000",
-  "sentry": ""
+  "sentry": "",
+  "segment": ""
 }

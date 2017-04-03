@@ -18,9 +18,13 @@
       "/__TESTS__/",
       "/coverage/",
       "/migrations/",
+      "/config/",
       ".eslintrc.js",
       "console.js",
-      "shipitfile.js"
+      "app.js",
+      "analytics.js",
+      "shipitfile.js",
+      "databaseConnection.js"
     ]
   },
   "scripts": {
@@ -35,6 +39,7 @@
     "lint": "node_modules/eslint/bin/eslint.js *.js **/*.js __**__/**/*.js"
   },
   "dependencies": {
+    "analytics-node": "^2.4.0",
     "app-module-path": "^2.2.0",
     "jsonfile": "^2.4.0",
     "kcors": "next",

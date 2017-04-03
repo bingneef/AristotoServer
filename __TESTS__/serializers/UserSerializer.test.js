@@ -1,10 +1,9 @@
 /* eslint-env node, jest */
-
 const UserSerializer = require('./../../serializers/UserSerializer')
 const UserFactory = require('../factory/UserFactory')
 const sequelize = require('../../databaseConnection')
 
-beforeAll(async (done) => {
+beforeEach(async (done) => {
   await sequelize.sync(
     {
       force: true
