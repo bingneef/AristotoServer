@@ -28,7 +28,7 @@
     "db:migrate": "node_modules/.bin/sequelize db:migrate",
     "db:rollback": "node_modules/.bin/sequelize db:migrate:undo",
     "test": "npm run lint && node_modules/jest/bin/jest.js --runInBand --forceExit --silent",
-    "generate-coverage": "cat ./coverage/lcov.info | node_modules/.bin/codacy-coverage -p .",
+    "send-coverage": "cat ./coverage/lcov.info | node_modules/.bin/codacy-coverage -p .",
     "lint": "node_modules/eslint/bin/eslint.js *.js **/*.js __**__/**/*.js"
   },
   "dependencies": {
@@ -67,6 +67,7 @@
     "faker": "^4.1.0",
     "jest": "^19.0.2",
     "jshint": "^2.9.4",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.11.0",
     "shipit-deploy": "^2.4.0",
     "shipit-npm": "^0.2.0",
