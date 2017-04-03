@@ -17,6 +17,7 @@ class AuthenticationHelper {
     })
 
     if (!user) ctx.throw(401)
+
     ctx.state.currentUser = user
     await next()
   }

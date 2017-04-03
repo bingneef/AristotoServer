@@ -1,12 +1,11 @@
 /* eslint-env node, jest */
-
-const statusRouter = require('../../routes/StatusRouter');
+const StatusRouter = require('../../routes/StatusRouter');
 
 test('StatusRouter Is Exported', () => {
-  expect(statusRouter).toBeDefined();
-  expect(Object.keys(statusRouter).length > 0).toBeTruthy();
+  expect(StatusRouter).toBeDefined();
+  expect(Object.keys(StatusRouter).length > 0).toBeTruthy();
 });
 
 test('StatusRouter Is Exported', () => {
-  expect(statusRouter.stack[0].path).toBe('/status')
+  expect(StatusRouter.stack[0].path).toBe('/status')
 });
