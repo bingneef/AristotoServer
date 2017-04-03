@@ -1,10 +1,10 @@
-const constants = require('./config/constants')
-const logger    = require('koa-logger')
-const Koa       = require('koa')
-const koaBody   = require('koa-bodyparser')
-const cors      = require('kcors')
-const Raven     = require('raven')
-const env       = require('./config/env')
+const constants             = require('./config/constants')
+const logger                = require('./node_modules/koa-logger')
+const Koa                   = require('./node_modules/koa')
+const koaBody               = require('./node_modules/koa-bodyparser')
+const cors                  = require('./node_modules/kcors')
+const Raven                 = require('./node_modules/raven')
+const env                   = require('./config/env')
 const StatusRouter          = require('./routes').StatusRouter
 const AuthenticationRouter  = require('./routes').AuthenticationRouter
 

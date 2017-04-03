@@ -28,8 +28,7 @@
     "db:migrate": "node_modules/.bin/sequelize db:migrate",
     "db:rollback": "node_modules/.bin/sequelize db:migrate:undo",
     "test": "npm run lint && node_modules/jest/bin/jest.js --runInBand --forceExit --silent",
-    "lint": "node_modules/eslint/bin/eslint.js *.js **/*.js",
-    "lint-watch": "node_modules/eslint-watch/bin/esw *.js **/*.js"
+    "lint": "node_modules/eslint/bin/eslint.js *.js **/*.js"
   },
   "dependencies": {
     "app-module-path": "^2.2.0",
@@ -63,7 +62,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^2.1.1",
-    "eslint-watch": "^3.0.1",
     "faker": "^4.1.0",
     "jest": "^19.0.2",
     "jshint": "^2.9.4",

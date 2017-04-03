@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
-const dbCredentials = require('./config/dbConfig');
-const SequelizeToJson = require('sequelize-to-json');
+const Sequelize       = require('./node_modules/sequelize');
+const SequelizeToJson = require('./node_modules/sequelize-to-json');
+const dbCredentials   = require('./config/dbConfig');
 
 const sequelize = new Sequelize(
   dbCredentials.database,
