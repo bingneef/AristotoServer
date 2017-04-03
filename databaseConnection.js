@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const dbCredentials = require('./config/dbConfig');
 const SequelizeToJson = require('sequelize-to-json');
 
-var sequelize = new Sequelize(
+const sequelize = new Sequelize(
   dbCredentials.database,
   dbCredentials.username,
   dbCredentials.password,
@@ -32,10 +32,10 @@ var sequelize = new Sequelize(
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection with database established');
+    console.log('Connection with database established') // eslint-disable-line no-console
   })
   .catch((err) => {
-    console.log('Error connecting to the database: ' + err);
+    console.log('Error connecting to the database:', err) // eslint-disable-line no-console
   });
 
 module.exports = sequelize;

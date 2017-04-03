@@ -10,12 +10,16 @@
     "globals": {
       "__TEST__": true
     },
+    "collectCoverageFrom": [
+      "**/*.js"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/config/",
-      "/spec/",
-      "/tmp/",
-      "databaseConnection.js"
+      "/__TESTS__/",
+      "/coverage/",
+      ".eslintrc.js",
+      "console.js",
+      "shipitfile.js"
     ]
   },
   "scripts": {

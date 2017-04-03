@@ -7,33 +7,33 @@ const User = database.define('users',
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     firstName: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     lastName: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     avatarUrl: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     email: {
       type: Sequelize.STRING,
       unique: true,
       validate: {
-        isEmail: true,
-      },
+        isEmail: true
+      }
     },
     apiToken: {
       type: Sequelize.STRING,
-      unique: true,
+      unique: true
     },
     active: {
-      type: Sequelize.BOOLEAN,
-    },
-  },
-);
+      type: Sequelize.BOOLEAN
+    }
+  }
+)
 
 SequelizeTokenify.tokenify(User, {
   field: 'apiToken',

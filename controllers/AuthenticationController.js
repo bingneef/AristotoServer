@@ -1,17 +1,17 @@
-const UserSerializer = require('../serializers/UserSerializer');
+const UserSerializer = require('../serializers/UserSerializer')
 
-const AuthenticationController = () => {}
+class AuthenticationController {
+  static async getCurrentUser (ctx) {
+    ctx.body = ctx.state.currentUser.serialize(UserSerializer)
+  }
 
-AuthenticationController.prototype.getCurrentUser = async (ctx) => {
-  ctx.body = ctx.state.currentUser.serialize(UserSerializer)
+  static async logout (ctx) {
+    await ctx.state.currentUser.update({
+      apiToken: null,
+      active: false
+    })
+    ctx.status = 204
+  }
 }
 
-AuthenticationController.prototype.logout = async (ctx) => {
-  await ctx.state.currentUser.update({
-    apiToken: null,
-    active: false
-  });
-  ctx.status = 204
-}
-
-module.exports = new AuthenticationController()
+module.exports = AuthenticationController
