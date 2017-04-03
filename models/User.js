@@ -2,41 +2,42 @@ const Sequelize = require('sequelize');
 const database = require('../databaseConnection');
 const SequelizeTokenify = require('sequelize-tokenify');
 
-var User = database.define('users',
+const User = database.define('users',
   {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     firstName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     lastName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     avatarUrl: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     email: {
       type: Sequelize.STRING,
       unique: true,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
     apiToken: {
       type: Sequelize.STRING,
-      unique: true
+      unique: true,
     },
     active: {
-      type: Sequelize.BOOLEAN
-    }
-  });
+      type: Sequelize.BOOLEAN,
+    },
+  },
+);
 
 SequelizeTokenify.tokenify(User, {
   field: 'apiToken',
-  length: '24'
+  length: '24',
 });
 
 module.exports = User

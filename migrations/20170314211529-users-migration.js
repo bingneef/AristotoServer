@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up: (queryInterface, Sequelize) => {
     queryInterface.createTable(
       'users',
       {
@@ -37,13 +35,11 @@ module.exports = {
         }
       },
       {
-        engine: 'MYISAM', // default: 'InnoDB'
-        charset: 'latin1' // default: null
+        engine: 'InnoDB',
+        charset: 'latin1'
       }
     )
   },
 
-  down: function (queryInterface, Sequelize) {
-    return queryInterface.dropAllTables();
-  }
+  down: queryInterface => queryInterface.dropAllTables()
 };

@@ -1,16 +1,18 @@
-const User = require('../models').User;
-var AuthenticateHelper = function () {};
+const User = require('../models').User
+
+const AuthenticateHelper = () => {}
 
 AuthenticateHelper.prototype.authenticate = async (ctx, next) => {
+  let apiToken;
   try {
-    var apiToken = ctx.request.header.authorization.split('=')[1];
+    apiToken = ctx.request.header.authorization.split('=')[1];
   } catch (exception) {
     ctx.throw(401)
-  };
+  }
 
-  var user = await User.findOne({
+  const user = await User.findOne({
     where: {
-      apiToken: apiToken,
+      apiToken,
       active: true
     }
   })
@@ -20,4 +22,4 @@ AuthenticateHelper.prototype.authenticate = async (ctx, next) => {
   await next()
 }
 
-module.exports = new AuthenticateHelper();
+module.exports = new AuthenticateHelper()

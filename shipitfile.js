@@ -1,8 +1,8 @@
-module.exports = function (shipit) {
-  require('shipit-deploy')(shipit);
-  require('shipit-pm2')(shipit);
-  require('shipit-npm')(shipit);
-  require('shipit-shared')(shipit);
+module.exports = (shipit) => {
+  require('shipit-deploy')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
+  require('shipit-pm2')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
+  require('shipit-npm')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
+  require('shipit-shared')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
 
   shipit.initConfig({
     default: {
@@ -35,21 +35,11 @@ module.exports = function (shipit) {
       deployTo: '/var/www/aristoto-api',
       servers: 'bing@5.157.85.46'
     }
-  });
+  })
 
-  shipit.blTask('db:migrate', () => {
-    return shipit.remote('cd ' + shipit.config.deployTo + '/current && npm run db:migrate');
-  });
+  shipit.blTask('db:migrate', () => shipit.remote(`cd ${shipit.config.deployTo}/current && npm run db:migrate`))
+  shipit.on('published', () => shipit.start('db:migrate'))
 
-  shipit.on('published', () => {
-    return shipit.start('db:migrate');
-  });
-
-  shipit.blTask('clean-up', () => {
-    return shipit.local('rm -r tmp');
-  });
-
-  shipit.on('finished', () => {
-    return shipit.start('clean-up');
-  });
-};
+  shipit.blTask('clean-up', () => shipit.local('rm -r tmp'))
+  shipit.on('finished', () => shipit.start('clean-up'))
+}

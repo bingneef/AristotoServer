@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up: (queryInterface, Sequelize) => {
     queryInterface.createTable(
       'oauths',
       {
@@ -33,13 +31,11 @@ module.exports = {
         }
       },
       {
-        engine: 'MYISAM', // default: 'InnoDB'
-        charset: 'latin1' // default: null
+        engine: 'InnoDB',
+        charset: 'latin1'
       }
     )
   },
 
-  down: function (queryInterface, Sequelize) {
-    queryInterface.dropTable('oauths');
-  }
+  down: queryInterface => queryInterface.dropTable('oauths')
 };

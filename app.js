@@ -1,11 +1,10 @@
 const constants = require('./config/constants');
-
-const logger  = require('koa-logger');
-const Koa     = require('koa');
-const app     = module.exports = new Koa();
-const koaBody = require('koa-bodyparser');
-const cors    = require('kcors');
-const env     = require('./config/env');
+const logger    = require('koa-logger');
+const Koa       = require('koa');
+const app       = module.exports = new Koa();
+const koaBody   = require('koa-bodyparser');
+const cors      = require('kcors');
+const env       = require('./config/env');
 
 // Sentry error catching
 if (process.env.NODE_ENV === 'production') {

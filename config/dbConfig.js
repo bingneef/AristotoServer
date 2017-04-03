@@ -1,13 +1,13 @@
 /* global __TEST__ */
-const path      = require('path');
-const jsonfile  = require('jsonfile');
+const path      = require('path')
+const jsonfile  = require('jsonfile')
 
-var dbConfig;
+let dbConfig
 
 if (typeof __TEST__ !== 'undefined' && __TEST__) {
-  dbConfig = jsonfile.readFileSync(path.join(__dirname, '/config-test.json'));
+  dbConfig = jsonfile.readFileSync(path.join(__dirname, '/config-test.json'))
 } else {
-  dbConfig = jsonfile.readFileSync(path.join(__dirname, '/config.json'));
+  dbConfig = jsonfile.readFileSync(path.join(__dirname, '/config.json'))
 }
 
-module.exports = dbConfig;
+module.exports = dbConfig
