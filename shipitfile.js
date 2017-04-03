@@ -1,8 +1,12 @@
 module.exports = (shipit) => {
-  require('./node_modules/shipit-deploy')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
-  require('./node_modules/shipit-pm2')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
-  require('./node_modules/shipit-npm')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
-  require('./node_modules/shipit-shared')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-deploy')(shipit)
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-pm2')(shipit)
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-npm')(shipit)
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-shared')(shipit)
 
   shipit.initConfig({
     default: {

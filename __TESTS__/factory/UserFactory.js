@@ -1,4 +1,5 @@
-const faker = require('../../node_modules/faker') // eslint-disable-line import/no-extraneous-dependencies, global-require
+// eslint-disable-next-line import/no-extraneous-dependencies, global-require
+const faker = require('../../node_modules/faker')
 const User = require('../../models').User
 
 class UserFactory {
