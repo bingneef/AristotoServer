@@ -1,8 +1,8 @@
-const Sequelize = require('sequelize');
-const database = require('../databaseConnection');
-const User = require('./index').User;
+const Sequelize = require('sequelize')
+const database = require('../databaseConnection')
+const User = require('./index').User
 
-var Oauth = database.define('oauth',
+const Oauth = database.define('oauth',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -22,6 +22,7 @@ var Oauth = database.define('oauth',
         key: 'id'
       }
     }
-  });
+  }
+)
 
 module.exports = Oauth
