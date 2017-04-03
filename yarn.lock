@@ -209,6 +209,10 @@ async@^2.1.4:
   dependencies:
     lodash "^4.14.0"
 
+async@~0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -775,7 +779,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^2.3, bluebird@^2.9.1, bluebird@^2.9.x:
+bluebird@^2.3, bluebird@^2.9.1, bluebird@^2.9.14, bluebird@^2.9.x:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
 
@@ -3146,7 +3150,7 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-liftoff@^2.1.0:
+liftoff@^2.0.0, liftoff@^2.1.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/liftoff/-/liftoff-2.3.0.tgz#a98f2ff67183d8ba7cfaca10548bd7ff0550b385"
   dependencies:
@@ -3726,7 +3730,7 @@ optionator@^0.8.1, optionator@^0.8.2:
     type-check "~0.3.2"
     wordwrap "~1.0.0"
 
-orchestrator@^0.3.0:
+orchestrator@^0.3.0, orchestrator@^0.3.7:
   version "0.3.8"
   resolved "https://registry.yarnpkg.com/orchestrator/-/orchestrator-0.3.8.tgz#14e7e9e2764f7315fbac184e506c7aa6df94ad7e"
   dependencies:
@@ -4393,6 +4397,22 @@ shimmer@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shimmer/-/shimmer-1.1.0.tgz#97d7377137ffbbab425522e429fe0aa89a488b35"
 
+shipit-cli:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/shipit-cli/-/shipit-cli-3.0.0.tgz#a9ad1185146ddc80951a8eb6b762d9e8b6587cba"
+  dependencies:
+    bluebird "^3.3.4"
+    chalk "^1.0.0"
+    interpret "^1.0.0"
+    liftoff "^2.0.0"
+    lodash "^4.6.1"
+    minimist "^1.1.0"
+    orchestrator "^0.3.7"
+    pretty-hrtime "^1.0.0"
+    ssh-pool "^1.0.0"
+    stream-line-wrapper "^0.1.1"
+    v8flags "^2.0.2"
+
 shipit-deploy, shipit-deploy@^2.1.2:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/shipit-deploy/-/shipit-deploy-2.4.0.tgz#02b06605d67faad26d3510f5ea8b670a3be0c95e"
@@ -4543,6 +4563,16 @@ sqlstring@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/sqlstring/-/sqlstring-2.2.0.tgz#c3135c4ea8abcd7e7ee741a4966a891d86a4f191"
 
+ssh-pool@^1.0.0:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/ssh-pool/-/ssh-pool-1.4.1.tgz#4731b63e80aab0b7c5bf72e4c130409ccd090555"
+  dependencies:
+    bluebird "^2.9.14"
+    lodash "^3.5.0"
+    sprintf-js "^1.0.2"
+    stream-line-wrapper "^0.1.1"
+    whereis "^0.4.0"
+
 sshpk@^1.7.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.11.0.tgz#2d8d5ebb4a6fab28ffba37fa62a90f4a3ea59d77"
@@ -4575,6 +4605,12 @@ stream-combiner@~0.0.4:
 stream-consume@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/stream-consume/-/stream-consume-0.1.0.tgz#a41ead1a6d6081ceb79f65b061901b6d8f3d1d0f"
+
+stream-line-wrapper@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/stream-line-wrapper/-/stream-line-wrapper-0.1.1.tgz#3e2be1d368c6356f90aeef64786683f3eee3eea7"
+  dependencies:
+    async "~0.2.10"
 
 stream-shift@^1.0.0:
   version "1.0.0"
@@ -4994,6 +5030,10 @@ whatwg-url@^4.3.0:
   dependencies:
     tr46 "~0.0.3"
     webidl-conversions "^3.0.0"
+
+whereis@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/whereis/-/whereis-0.4.0.tgz#7ace618a4b8c2a8863db36ff9f54ef8aa23d822b"
 
 which-module@^1.0.0:
   version "1.0.0"
