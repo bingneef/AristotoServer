@@ -28,6 +28,7 @@
     "db:migrate": "node_modules/.bin/sequelize db:migrate",
     "db:rollback": "node_modules/.bin/sequelize db:migrate:undo",
     "test": "npm run lint && node_modules/jest/bin/jest.js --runInBand --forceExit --silent",
+    "generate-coverage": "cat ./coverage/lcov.info | node_modules/.bin/codacy-coverage -p ."
     "lint": "node_modules/eslint/bin/eslint.js *.js **/*.js __**__/**/*.js"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-3": "^6.22.0",
+    "codacy-coverage": "^2.0.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-config-standard": "^7.1.0",
