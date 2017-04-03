@@ -1,8 +1,12 @@
 module.exports = (shipit) => {
-  require('shipit-deploy')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
-  require('shipit-pm2')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
-  require('shipit-npm')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
-  require('shipit-shared')(shipit) // eslint-disable-line import/no-extraneous-dependencies, global-require
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-deploy')(shipit)
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-pm2')(shipit)
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-npm')(shipit)
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  require('./node_modules/shipit-shared')(shipit)
 
   shipit.initConfig({
     default: {
@@ -37,9 +41,15 @@ module.exports = (shipit) => {
     }
   })
 
-  shipit.blTask('db:migrate', () => shipit.remote(`cd ${shipit.config.deployTo}/current && npm run db:migrate`))
+  shipit.blTask('db:migrate', () => {
+    const command = `cd ${shipit.config.deployTo}/current && npm run db:migrate`
+    return shipit.remote(command)
+  })
   shipit.on('published', () => shipit.start('db:migrate'))
 
-  shipit.blTask('clean-up', () => shipit.local('rm -r tmp'))
+  shipit.blTask('clean-up', () => {
+    const command = 'rm -r tmp'
+    shipit.local(command)
+  })
   shipit.on('finished', () => shipit.start('clean-up'))
 }

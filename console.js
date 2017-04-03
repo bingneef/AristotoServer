@@ -1,7 +1,8 @@
 require('app-module-path').addPath(__dirname);
-const app = require('./app');
-const repl = require('repl');
-const babel = require('babel-core') // eslint-disable-line import/no-extraneous-dependencies
+const app   = require('./app');
+const repl  = require('repl');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const babel = require('./node_modules/babel-core')
 
 const preprocess = (input) => {
   const awaitMatcher = /^(?:\s*(?:(?:let|var|const)\s)?\s*([^=]+)=\s*|^\s*)(await\s[\s\S]*)/;

@@ -1,25 +1,23 @@
-var faker = require('faker');
+// eslint-disable-next-line import/no-extraneous-dependencies, global-require
+const faker = require('../../node_modules/faker')
 const User = require('../../models').User
-var UserFactory = function () {};
 
-var params = () => {
-  return {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    avatarUrl: faker.image.imageUrl(),
-    email: faker.internet.email(),
-    password: 'testtest',
-    active: true
+class UserFactory {
+  static params () {
+    return {
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      avatarUrl: faker.image.imageUrl(),
+      email: faker.internet.email(),
+      password: 'testtest',
+      active: true
+    }
+  }
+
+  static async create () {
+    const user = await User.create(UserFactory.params())
+    return user
   }
 }
 
-UserFactory.prototype.userParams = () => {
-  return params()
-}
-
-UserFactory.prototype.create = async () => {
-  var user = await User.create(params())
-  return user
-}
-
-module.exports = new UserFactory();
+module.exports = UserFactory
