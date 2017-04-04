@@ -1,18 +1,12 @@
 const Sequelize = require('sequelize')
 const database = require('../databaseConnection')
 
-const Oauth = database.define('oauths',
+const Prediction = database.define('predictions',
   {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
-    },
-    type: {
-      type: Sequelize.STRING
-    },
-    identifier: {
-      type: Sequelize.STRING
     },
     userId: {
       type: Sequelize.INTEGER,
@@ -20,8 +14,18 @@ const Oauth = database.define('oauths',
         model: 'users',
         key: 'id'
       }
+    },
+    matchId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'matches',
+        key: 'id'
+      }
+    },
+    value: {
+      type: Sequelize.ENUM('HOME', 'DRAW', 'AWAY')
     }
   }
 )
 
-module.exports = Oauth
+module.exports = Prediction
