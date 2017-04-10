@@ -20,6 +20,9 @@ module.exports = {
           allowNull: false,
           unique: true
         },
+        avatarUrl: {
+          type: Sequelize.STRING
+        },
         apiToken: {
           type: Sequelize.STRING,
           unique: true
