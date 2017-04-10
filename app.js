@@ -7,6 +7,8 @@ const Raven                 = require('./node_modules/raven')
 const env                   = require('./config/env')
 const StatusRouter          = require('./routes').StatusRouter
 const AuthenticationRouter  = require('./routes').AuthenticationRouter
+const TeamRouter            = require('./routes').TeamRouter
+const RoundRouter           = require('./routes').RoundRouter
 
 // Sentry error catching
 if (process.env.NODE_ENV === 'production') {
@@ -42,6 +44,8 @@ app.use(koaBody({
 app.use(cors())
 app.use(StatusRouter.routes())
 app.use(AuthenticationRouter.routes())
+app.use(TeamRouter.routes())
+app.use(RoundRouter.routes())
 
 if (!module.parent) {
   const port = process.env.PORT || 5000
