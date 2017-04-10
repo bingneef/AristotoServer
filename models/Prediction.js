@@ -23,6 +23,7 @@ const Prediction = database.define('predictions',
       }
     },
     value: {
+      // eslint-disable-next-line new-cap
       type: Sequelize.ENUM('HOME', 'DRAW', 'AWAY')
     }
   }
