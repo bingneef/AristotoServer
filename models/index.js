@@ -7,7 +7,9 @@ const Prediction = require('./Prediction.js')
 
 // Match
 Match.belongsTo(Round)
-// Match.belongsTo(Team)
+Match.belongsTo(Team, {
+  foreignKey: 'clubTeamId'
+})
 Match.hasMany(Prediction, {
   onDelete: 'cascade',
 })
@@ -25,6 +27,7 @@ Round.hasMany(Match, {
 
 // Team
 Team.hasMany(Match, {
+  foreignKey: 'clubTeamId',
   onDelete: 'cascade',
 })
 Team.hasMany(Prediction, {

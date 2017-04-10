@@ -15,9 +15,6 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false
         },
-        playedAt: {
-          type: Sequelize.DATE
-        },
         createdAt: {
           type: Sequelize.DATE
         },

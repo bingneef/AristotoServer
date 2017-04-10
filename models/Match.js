@@ -40,6 +40,12 @@ const Match = database.define('matches',
     playedAt: {
       type: Sequelize.DATE
     },
+  }, {
+    defaultScope: {
+      where: {
+        active: true
+      }
+    }
   }
 )
 

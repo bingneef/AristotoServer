@@ -14,6 +14,12 @@ const Round = database.define('rounds',
     value: {
       type: Sequelize.INTEGER
     }
+  }, {
+    defaultScope: {
+      where: {
+        visible: true
+      }
+    }
   }
 )
 
