@@ -8,6 +8,7 @@ const MatchSerializer  = require('../../serializers/MatchSerializer')
 const Round            = require('../../models').Round
 const Match            = require('../../models').Match
 const Team             = require('../../models').Team
+const Prediction       = require('../../models').Prediction
 
 beforeEach(async (done) => {
   await sequelize.sync(
@@ -42,12 +43,46 @@ describe('#getMatches', () => {
 
     const ctx = {
       state: {
+        currentUser: {},
         currentRound: a
       }
     }
 
-    matchA = await Match.findOne({ where: matchA.id, include: Team })
-    matchB = await Match.findOne({ where: matchB.id, include: Team })
+    matchA = await Match.findOne(
+      {
+        where: matchA.id,
+        include: [
+          {
+            model: Team
+          },
+          {
+            model: Prediction,
+            where: {
+              userId: 1
+            },
+            required: false
+          }
+        ]
+      }
+    )
+
+    matchB = await Match.findOne(
+      {
+        where: matchB.id,
+        include: [
+          {
+            model: Team
+          },
+          {
+            model: Prediction,
+            where: {
+              userId: 1
+            },
+            required: false
+          }
+        ]
+      }
+    )
 
     await RoundController.getMatches(ctx)
 

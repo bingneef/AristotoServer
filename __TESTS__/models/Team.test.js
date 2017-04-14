@@ -3,7 +3,7 @@ const Team = require('../../models').Team
 
 describe('Database properties', () => {
   test('associations', () => {
-    expect(Object.keys(Team.associations)).toEqual(['matches', 'predictions'])
+    expect(Object.keys(Team.associations)).toEqual(['matches'])
   })
 
   test('attributes', () => {

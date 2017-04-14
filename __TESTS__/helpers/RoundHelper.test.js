@@ -22,7 +22,7 @@ beforeEach(async (done) => {
 })
 
 describe('#getRound', () => {
-  test('RoundHelper throws 401 if no token', async () => {
+  test('RoundHelper throws 401 if not found', async () => {
     ctx.params = {
       id: 'bogus'
     }
@@ -34,7 +34,7 @@ describe('#getRound', () => {
     }
   })
 
-  test('AuthenticationHelper sets round to ctx.state.currentRound', async () => {
+  test('RoundHelper sets round to ctx.state.currentRound', async () => {
     const a = await RoundFactory.create()
     ctx.params = {
       id: a.id

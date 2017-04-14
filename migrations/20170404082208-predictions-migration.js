@@ -23,7 +23,7 @@ module.exports = {
           }
         },
         value: {
-          type: Sequelize.STRING,
+          type: Sequelize.ENUM('home', 'draw', 'away'),
           allowNull: false
         },
         createdAt: {

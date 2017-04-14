@@ -9,6 +9,7 @@ const StatusRouter          = require('./routes').StatusRouter
 const AuthenticationRouter  = require('./routes').AuthenticationRouter
 const TeamRouter            = require('./routes').TeamRouter
 const RoundRouter           = require('./routes').RoundRouter
+const PredictionRouter      = require('./routes').PredictionRouter
 
 // Sentry error catching
 if (process.env.NODE_ENV === 'production') {
@@ -46,6 +47,7 @@ app.use(StatusRouter.routes())
 app.use(AuthenticationRouter.routes())
 app.use(TeamRouter.routes())
 app.use(RoundRouter.routes())
+app.use(PredictionRouter.routes())
 
 if (!module.parent) {
   const port = process.env.PORT || 5000
