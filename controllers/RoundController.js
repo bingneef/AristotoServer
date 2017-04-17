@@ -5,15 +5,13 @@ const Prediction       = require('../models').Prediction
 const RoundSerializer  = require('../serializers/RoundSerializer')
 const MatchSerializer  = require('../serializers/MatchSerializer')
 
-const generatePredictionParam = (ctx, params, validMatchIds) => {
+const generatePredictionParams = (ctx, params, validMatchIds) => {
   if (validMatchIds.indexOf(params.matchId) === -1) {
     ctx.throw(422)
-    return false
   }
 
   if (Prediction.rawAttributes.value.values.indexOf(params.value) === -1) {
     ctx.throw(422)
-    return false
   }
 
   const payload = {
@@ -94,7 +92,7 @@ class RoundController {
 
     // Mapped prediction params
     const predictionParams = ctx.request.body.map(
-      data => generatePredictionParam(ctx, data, validMatchIds)
+      data => generatePredictionParams(ctx, data, validMatchIds)
     )
 
     // Createable
