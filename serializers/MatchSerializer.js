@@ -1,11 +1,15 @@
 const scheme = {
-  include: ['@all', 'team'],
+  include: ['@all', 'team', 'predictions'],
   exclude: ['active', '@fk', '@auto'],
   as: {
-    team: 'clubTeam'
+    team: 'clubTeam',
+    predictions: 'myPrediction'
   },
   assoc: {
     team: {
+      exclude: ['@fk', '@auto']
+    },
+    predictions: {
       exclude: ['@fk', '@auto']
     }
   }

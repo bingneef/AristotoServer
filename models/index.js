@@ -30,9 +30,6 @@ Team.hasMany(Match, {
   foreignKey: 'clubTeamId',
   onDelete: 'cascade',
 })
-Team.hasMany(Prediction, {
-  onDelete: 'cascade',
-})
 
 // User
 User.hasMany(Oauth, {

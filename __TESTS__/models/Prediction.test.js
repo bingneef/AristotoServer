@@ -14,8 +14,7 @@ describe('Database properties', () => {
         'matchId',
         'value',
         'createdAt',
-        'updatedAt',
-        'teamId'
+        'updatedAt'
       ]
     )
   })

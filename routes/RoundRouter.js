@@ -11,8 +11,8 @@ const RoundRouter = new Router(
 
 RoundRouter.use('/', AuthenticationHelper.authenticate)
 RoundRouter.get('/', RoundController.getRounds)
-// RoundRouter.all('/:id*?', RoundHelper.getRound)
-RoundRouter.get('/:id/matches', RoundHelper.getRound)
+RoundRouter.use('/:id', RoundHelper.getRound)
 RoundRouter.get('/:id/matches', RoundController.getMatches)
+RoundRouter.post('/:id/predictions', RoundController.setPredictions)
 
 module.exports = RoundRouter

@@ -8,4 +8,5 @@ test('StatusRouter Is Exported', () => {
 
 test('StatusRouter Is Exported', () => {
   expect(StatusRouter.stack[0].path).toBe('/status')
+  expect(StatusRouter.stack[1]).not.toBeTruthy()
 });

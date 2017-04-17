@@ -1,8 +1,12 @@
 /* eslint-env node, jest */
-const MatchSerializer = require('./../../serializers/MatchSerializer')
-const MatchFactory    = require('../factory/MatchFactory')
-const Match           = require('./../../models').Match
-const sequelize       = require('../../databaseConnection')
+const MatchSerializer   = require('./../../serializers/MatchSerializer')
+const MatchFactory      = require('../factory/MatchFactory')
+const PredictionFactory = require('../factory/PredictionFactory')
+const UserFactory       = require('../factory/UserFactory')
+const Match             = require('./../../models').Match
+const Team              = require('./../../models').Team
+const Prediction        = require('./../../models').Prediction
+const sequelize         = require('../../databaseConnection')
 
 beforeEach(async (done) => {
   await sequelize.sync(
@@ -26,7 +30,8 @@ test('Scheme', async () => {
   expect(MatchSerializer.include).toEqual(
     [
       '@all',
-      'team'
+      'team',
+      'predictions'
     ]
   )
 
@@ -40,12 +45,19 @@ test('Scheme', async () => {
 
   expect(MatchSerializer.as).toEqual(
     {
-      team: 'clubTeam'
+      team: 'clubTeam',
+      predictions: 'myPrediction'
     }
   )
 
   expect(MatchSerializer.assoc).toEqual(
     {
+      predictions: {
+        exclude: [
+          '@fk',
+          '@auto'
+        ]
+      },
       team: {
         exclude: [
           '@fk',
@@ -56,11 +68,30 @@ test('Scheme', async () => {
   )
 })
 
-test('Match json', async () => {
+test('Without a team nor prediction', async () => {
+  const user = await UserFactory.create()
   let a = await MatchFactory.create()
-  a = await Match.findOne({ roundId: a.id })
+  await PredictionFactory.create({ userId: user.id, matchId: a.id })
+
+  a = await Match.findOne(
+    {
+      id: a.id,
+      include: [
+        {
+          model: Team
+        },
+        {
+          model: Prediction,
+          where: {
+            userId: user.id
+          },
+          required: false
+        }
+      ]
+    }
+  )
   const serializedMatch = a.serialize(MatchSerializer)
   expect(Object.keys(serializedMatch)).toEqual(
-    ['id', 'opponentName', 'isHome', 'homeScore', 'awayScore', 'playedAt']
+    ['id', 'opponentName', 'isHome', 'homeScore', 'awayScore', 'playedAt', 'clubTeam', 'myPrediction']
   )
 })
