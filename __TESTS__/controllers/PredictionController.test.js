@@ -14,21 +14,6 @@ beforeEach(async (done) => {
   done()
 })
 
-describe('#show', () => {
-  it('returns an serialized prediction', async () => {
-    const a = await PredictionFactory.create()
-    const ctx = {
-      state: {
-        currentPrediction: a
-      }
-    }
-
-    await PredictionController.show(ctx)
-
-    expect(ctx.body).toEqual(a.serialize(PredictionSerializer))
-  });
-})
-
 describe('#update', () => {
   it('update an prediction', async () => {
     let a = await PredictionFactory.create({ value: 'home' })

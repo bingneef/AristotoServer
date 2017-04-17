@@ -8,7 +8,7 @@ class PredictionHelper {
       }
     })
 
-    if (!round) ctx.throw(401)
+    if (!round) ctx.throw(404)
 
     ctx.state.currentPrediction = round
     await next()

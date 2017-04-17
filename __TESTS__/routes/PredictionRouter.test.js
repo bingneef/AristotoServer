@@ -18,13 +18,10 @@ test('PredictionRouter has the routes', () => {
   expect(PredictionRouter.stack[1].methods).toEqual([])
 
   expect(PredictionRouter.stack[2].path).toEqual('/api/v1/predictions/:id')
-  expect(PredictionRouter.stack[2].methods).toEqual(['HEAD', 'GET'])
+  expect(PredictionRouter.stack[2].methods).toEqual(['PUT'])
 
   expect(PredictionRouter.stack[3].path).toEqual('/api/v1/predictions/:id')
-  expect(PredictionRouter.stack[3].methods).toEqual(['PUT'])
+  expect(PredictionRouter.stack[3].methods).toEqual(['DELETE'])
 
-  expect(PredictionRouter.stack[4].path).toEqual('/api/v1/predictions/:id')
-  expect(PredictionRouter.stack[4].methods).toEqual(['DELETE'])
-
-  expect(PredictionRouter.stack[5]).not.toBeTruthy()
+  expect(PredictionRouter.stack[4]).not.toBeTruthy()
 });

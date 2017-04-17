@@ -11,7 +11,6 @@ const PredictionRouter = new Router(
 
 PredictionRouter.use('/', AuthenticationHelper.authenticate)
 PredictionRouter.use('/:id', PredictionHelper.getPrediction)
-PredictionRouter.get('/:id', PredictionController.show)
 PredictionRouter.put('/:id', PredictionController.update)
 PredictionRouter.delete('/:id', PredictionController.destroy)
 

@@ -23,5 +23,8 @@ test('RoundRouter has the routes', () => {
   expect(RoundRouter.stack[3].path).toEqual('/api/v1/rounds/:id/matches')
   expect(RoundRouter.stack[3].methods).toEqual(['HEAD', 'GET'])
 
-  expect(RoundRouter.stack[4]).not.toBeTruthy()
+  expect(RoundRouter.stack[4].path).toEqual('/api/v1/rounds/:id/predictions')
+  expect(RoundRouter.stack[4].methods).toEqual(['POST'])
+
+  expect(RoundRouter.stack[5]).not.toBeTruthy()
 });

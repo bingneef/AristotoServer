@@ -16,10 +16,6 @@ const predictionParams = (body) => {
 }
 
 class PredictionController {
-  static async show (ctx) {
-    ctx.body = ctx.state.currentPrediction.serialize(PredictionSerializer)
-  }
-
   static async update (ctx) {
     const prediction = await ctx.state.currentPrediction.update(predictionParams(ctx.request.body))
     ctx.body = prediction.serialize(PredictionSerializer)

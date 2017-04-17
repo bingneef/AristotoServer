@@ -22,7 +22,7 @@ beforeEach(async (done) => {
 })
 
 describe('#getRound', () => {
-  test('RoundHelper throws 401 if not found', async () => {
+  test('RoundHelper throws 404 if not found', async () => {
     ctx.params = {
       id: 'bogus'
     }
@@ -30,7 +30,7 @@ describe('#getRound', () => {
     try {
       await RoundHelper.getRound(ctx, null)
     } catch (e) {
-      expect(e.message).toEqual('401')
+      expect(e.message).toEqual('404')
     }
   })
 
@@ -46,7 +46,7 @@ describe('#getRound', () => {
     expect(myMockFn).toBeCalled()
   })
 
-  test('RoundHelper throws 401 if no active visible found', async () => {
+  test('RoundHelper throws 404 if no active visible found', async () => {
     const a = await RoundFactory.create({ visible: false })
     await RoundFactory.create()
     ctx.params = {
@@ -57,7 +57,7 @@ describe('#getRound', () => {
     try {
       await RoundHelper.getRound(ctx, myMockFn)
     } catch (e) {
-      expect(e.message).toEqual('401')
+      expect(e.message).toEqual('404')
     }
 
     expect(myMockFn).not.toBeCalled()

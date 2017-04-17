@@ -22,7 +22,7 @@ beforeEach(async (done) => {
 })
 
 describe('#getPrediction', () => {
-  test('PredictionHelper throws 401 if not found', async () => {
+  test('PredictionHelper throws 404 if not found', async () => {
     ctx.params = {
       id: 'bogus'
     }
@@ -30,7 +30,7 @@ describe('#getPrediction', () => {
     try {
       await PredictionHelper.getPrediction(ctx, null)
     } catch (e) {
-      expect(e.message).toEqual('401')
+      expect(e.message).toEqual('404')
     }
   })
 
