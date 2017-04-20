@@ -1,11 +1,15 @@
-const constants             = require('./config/constants')
-const logger                = require('./node_modules/koa-logger')
+const path                  = require('path')
 const Koa                   = require('./node_modules/koa')
+const logger                = require('./node_modules/koa-logger')
 const koaBody               = require('./node_modules/koa-bodyparser')
+const views                 = require('koa-views')
+const convert               = require('koa-convert')
 const cors                  = require('./node_modules/kcors')
 const Raven                 = require('./node_modules/raven')
+const constants             = require('./config/constants')
 const env                   = require('./config/env')
 const StatusRouter          = require('./routes').StatusRouter
+const OauthRouter           = require('./routes').OauthRouter
 const AuthenticationRouter  = require('./routes').AuthenticationRouter
 const TeamRouter            = require('./routes').TeamRouter
 const RoundRouter           = require('./routes').RoundRouter
@@ -35,6 +39,7 @@ app.use(async (ctx, next) => {
   }
 })
 
+app.use(convert(views(path.join(__dirname, '/views'), { extension: 'jade' })));
 app.use(logger())
 app.use(koaBody({
   onerror: (err, ctx) => {
@@ -42,6 +47,7 @@ app.use(koaBody({
     ctx.throw('MALFORMED_REQUEST', 422)
   }
 }))
+app.use(OauthRouter.routes());
 app.use(cors())
 app.use(StatusRouter.routes())
 app.use(AuthenticationRouter.routes())
