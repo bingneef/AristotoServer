@@ -72,11 +72,11 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       getUserOfToken(
         'facebook', 
-        profile.id, 
-        profile.name.givenName, 
-        profile.name.familyName, 
-        profile.emails[0].value, 
-        profile.photos[0].value, 
+        profile.id,
+        profile.name.givenName,
+        profile.name.familyName,
+        profile.emails[0].value,
+        profile.photos[0].value,
         done
       )
     }
@@ -94,11 +94,11 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       getUserOfToken(
         'google', 
-        profile.id, 
-        profile.name.givenName, 
-        profile.name.familyName, 
-        profile.email, 
-        profile.photos[0].value, 
+        profile.id,
+        profile.name.givenName,
+        profile.name.familyName,
+        profile.email,
+        profile.photos[0].value,
         done
       )
     }
