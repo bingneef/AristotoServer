@@ -71,7 +71,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       getUserOfToken(
-        'facebook', 
+        'facebook',
         profile.id,
         profile.name.givenName,
         profile.name.familyName,
@@ -93,7 +93,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       getUserOfToken(
-        'google', 
+        'google',
         profile.id,
         profile.name.givenName,
         profile.name.familyName,
