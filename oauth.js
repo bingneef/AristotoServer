@@ -70,7 +70,15 @@ passport.use(
       enableProof: true
     },
     (accessToken, refreshToken, profile, done) => {
-      getUserOfToken('facebook', profile.id, profile.name.givenName, profile.name.familyName, profile.emails[0].value, profile.photos[0].value, done)
+      getUserOfToken(
+        'facebook', 
+        profile.id, 
+        profile.name.givenName, 
+        profile.name.familyName, 
+        profile.emails[0].value, 
+        profile.photos[0].value, 
+        done
+      )
     }
   )
 )
@@ -84,7 +92,15 @@ passport.use(
       scope: ['https://www.googleapis.com/auth/userinfo.email']
     },
     (accessToken, refreshToken, profile, done) => {
-      getUserOfToken('google', profile.id, profile.name.givenName, profile.name.familyName, profile.email, profile.photos[0].value, done)
+      getUserOfToken(
+        'google', 
+        profile.id, 
+        profile.name.givenName, 
+        profile.name.familyName, 
+        profile.email, 
+        profile.photos[0].value, 
+        done
+      )
     }
   )
 )
