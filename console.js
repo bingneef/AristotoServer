@@ -1,5 +1,6 @@
 require('app-module-path').addPath(__dirname);
 const app   = require('./app');
+const models   = require('./models');
 const repl  = require('repl');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const babel = require('./node_modules/babel-core')
@@ -14,13 +15,15 @@ const preprocess = (input) => {
   // match & transform
   const match = input.match(awaitMatcher);
   if (match) {
-    input = `${asyncWrapper(match[2], match[1])}` // eslint-disable-line no-param-reassign
+    // eslint-disable-next-line no-param-reassign
+    input = `${asyncWrapper(match[2], match[1])}`
   }
   return input;
 }
 
 const replInstance = repl.start({ prompt: '> ' });
-const _eval = replInstance.eval // eslint-disable-line no-underscore-dangle
+// eslint-disable-next-line no-underscore-dangle
+const _eval = replInstance.eval
 
 replInstance.eval = (cmd, context, filename, callback) => {
   const code = babel.transform(preprocess(cmd), {
@@ -35,3 +38,4 @@ replInstance.eval = (cmd, context, filename, callback) => {
 };
 
 replInstance.context.app = app;
+replInstance.context.models = models;

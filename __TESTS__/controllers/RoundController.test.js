@@ -3,7 +3,6 @@ const RoundController   = require('../../controllers/RoundController')
 const RoundFactory      = require('../factory/RoundFactory')
 const UserFactory       = require('../factory/UserFactory')
 const MatchFactory      = require('../factory/MatchFactory')
-const PredictionFactory = require('../factory/PredictionFactory')
 const sequelize         = require('../../databaseConnection')
 const RoundSerializer   = require('../../serializers/RoundSerializer')
 const MatchSerializer   = require('../../serializers/MatchSerializer')
@@ -119,14 +118,7 @@ describe('#setPredictions', () => {
     done()
   })
 
-  it('sets returns no predictions if none provided', async () => {
-    await RoundController.setPredictions(ctx)
-
-    expect(ctx.body.length).toEqual(1)
-    expect(ctx.body[0].myPrediction).toEqual([])
-  })
-
-  it('sets the prediction if match for current round', async () => {
+  it('sets the prediction for the match', async () => {
     const matchB = await MatchFactory.create({ roundId: currentRound.id })
     ctx.request = {
       body: [
@@ -146,79 +138,5 @@ describe('#setPredictions', () => {
     expect(ctx.body.length).toEqual(2)
     expect(ctx.body[0].myPrediction[0].value).toEqual('home')
     expect(ctx.body[1].myPrediction[0].value).toEqual('draw')
-  })
-
-  it('updates the prediction if already present for match and user', async () => {
-    const prediction = await PredictionFactory.create(
-      {
-        userId: currentUser.id,
-        matchId: matchA.id,
-        value: 'away'
-      }
-    )
-
-    ctx.request = {
-      body: [
-        {
-          matchId: matchA.id,
-          value: 'home'
-        }
-      ]
-    }
-
-    await RoundController.setPredictions(ctx)
-
-    expect(ctx.body.length).toEqual(1)
-    expect(ctx.body[0].myPrediction[0].id).toEqual(prediction.id)
-    expect(ctx.body[0].myPrediction[0].value).toEqual('home')
-  })
-
-  it('delete the prediction if no longer in params', async () => {
-    await PredictionFactory.create(
-      {
-        userId: currentUser.id,
-        matchId: matchA.id,
-        value: 'away'
-      }
-    )
-
-    await RoundController.setPredictions(ctx)
-
-    expect(ctx.body.length).toEqual(1)
-    expect(ctx.body[0].myPrediction).toEqual([])
-  })
-
-  it('returns 422 if invalid value', async () => {
-    ctx.request = {
-      body: [
-        {
-          matchId: matchA.id,
-          value: 'bogus'
-        }
-      ]
-    }
-
-    try {
-      await RoundController.setPredictions(ctx)
-    } catch (e) {
-      expect(e.message).toEqual('422')
-    }
-  })
-
-  it('returns 422 if invalid match', async () => {
-    ctx.request = {
-      body: [
-        {
-          matchId: matchA.id + 1,
-          value: 'home'
-        }
-      ]
-    }
-
-    try {
-      await RoundController.setPredictions(ctx)
-    } catch (e) {
-      expect(e.message).toEqual('422')
-    }
   })
 })
