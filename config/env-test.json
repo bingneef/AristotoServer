@@ -3,5 +3,15 @@
   "frontEndOrigin": "http://localhost:8080",
   "serverOrigin": "http://localhost:5000",
   "sentry": "",
-  "segment": ""
+  "segment": "",
+  "oauth": {
+    "facebook": {
+      "clientID": "bogus",
+      "clientSecret": "bogus"
+    },
+    "google": {
+      "clientID": "bogus",
+      "clientSecret": "bogus"
+    }
+  }
 }

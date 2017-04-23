@@ -9,4 +9,20 @@ describe('Exports the routers', () => {
   test('StatusRouter Is Exported', () => {
     expect(routes.StatusRouter).not.toBe(null)
   });
+
+  test('OauthRouter Is Exported', () => {
+    expect(routes.OauthRouter).not.toBe(null)
+  });
+
+  test('PredictionRouter Is Exported', () => {
+    expect(routes.PredictionRouter).not.toBe(null)
+  });
+
+  test('RoundRouter Is Exported', () => {
+    expect(routes.RoundRouter).not.toBe(null)
+  });
+
+  test('TeamRouter Is Exported', () => {
+    expect(routes.TeamRouter).not.toBe(null)
+  });
 })
