@@ -22,6 +22,7 @@
       ".eslintrc.js",
       "console.js",
       "app.js",
+      "oauth.js",
       "analytics.js",
       "shipitfile.js",
       "databaseConnection.js"
