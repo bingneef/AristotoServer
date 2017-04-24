@@ -13,5 +13,9 @@
       "clientID": "bogus",
       "clientSecret": "bogus"
     }
+  },
+  "slack": {
+    "webhook": "bogus",
+    "channel": "bogus"
   }
 }

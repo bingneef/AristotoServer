@@ -2,20 +2,33 @@
 const Slack = require('node-slackr')
 const moment = require('moment')
 const s = require('underscore.string')
+const env = require('./config/env')
 
-const slack = new Slack('https://hooks.slack.com/services/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',
+let webhookUrl = env.slack.webhook
+let channel = env.slack.channel
+
+/* eslint-disable no-undef */
+if (typeof SLACK_WEBHOOK !== 'undefined' && SLACK_WEBHOOK) {
+  webhookUrl = SLACK_WEBHOOK
+}
+if (typeof SLACK_CHANNEL !== 'undefined' && SLACK_CHANNEL) {
+  channel = SLACK_CHANNEL
+}
+/* eslint-enable no-undef */
+
+const slack = new Slack(webhookUrl,
   {
-    channel: '#aristoto'
+    channel
   }
 )
 
-const allowedEnvs = ['production', 'staging']
-const env = s(process.argv[2]).capitalize().value()
+const allowedEnvs = ['Production', 'Staging']
+const buildEnv = s(process.argv[2]).capitalize().value()
 const message = {
   attachments: [
     {
       fallback: 'Deploy complete',
-      color: allowedEnvs.indexOf(process.argv[2]) > -1 ? 'good' : 'warning',
+      color: allowedEnvs.indexOf(buildEnv) > -1 ? 'good' : 'warning',
       fields: [
         {
           title: 'Deploy complete',
@@ -24,7 +37,7 @@ const message = {
         },
         {
           title: 'Environment',
-          value: env || 'Env undefined',
+          value: buildEnv || 'Env undefined',
           short: true
         }
       ]
