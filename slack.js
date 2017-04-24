@@ -9,8 +9,6 @@ const webhookUrl = process.env.SLACK_WEBHOOK || env.slack.webhook
 const channel = process.env.SLACK_CHANNEL || env.slack.channel
 /* eslint-enable no-undef */
 
-console.log(webhookUrl, channel)
-
 const slack = new Slack(webhookUrl,
   {
     channel
