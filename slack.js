@@ -4,17 +4,12 @@ const moment = require('moment')
 const s = require('underscore.string')
 const env = require('./config/env')
 
-let webhookUrl = env.slack.webhook
-let channel = env.slack.channel
-
 /* eslint-disable no-undef */
-if (typeof SLACK_WEBHOOK !== 'undefined' && SLACK_WEBHOOK) {
-  webhookUrl = SLACK_WEBHOOK
-}
-if (typeof SLACK_CHANNEL !== 'undefined' && SLACK_CHANNEL) {
-  channel = SLACK_CHANNEL
-}
+const webhookUrl = process.env.SLACK_WEBHOOK || env.slack.webhook
+const channel = process.env.SLACK_CHANNEL || env.slack.channel
 /* eslint-enable no-undef */
+
+console.log(webhookUrl, channel)
 
 const slack = new Slack(webhookUrl,
   {
