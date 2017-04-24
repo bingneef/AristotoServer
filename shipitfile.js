@@ -1,11 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies, global-require */
 module.exports = (shipit) => {
-  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
   require('./node_modules/shipit-deploy')(shipit)
-  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
   require('./node_modules/shipit-pm2')(shipit)
-  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
   require('./node_modules/shipit-npm')(shipit)
-  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
   require('./node_modules/shipit-shared')(shipit)
 
   shipit.initConfig({
@@ -51,5 +48,12 @@ module.exports = (shipit) => {
     const command = 'rm -r tmp'
     shipit.local(command)
   })
-  shipit.on('finished', () => shipit.start('clean-up'))
+  shipit.blTask('notify-slack', () => {
+    const command = `node slack.js ${shipit.environment}`
+    shipit.local(command)
+  })
+  shipit.on('deployed', () => {
+    shipit.start('clean-up')
+    shipit.start('notify-slack')
+  })
 }
