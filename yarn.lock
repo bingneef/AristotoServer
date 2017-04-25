@@ -3996,7 +3996,7 @@ mocha-lcov-reporter:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/mocha-lcov-reporter/-/mocha-lcov-reporter-1.3.0.tgz#469bdef4f8afc9a116056f079df6182d0afb0384"
 
-moment, moment@2.x.x:
+moment, moment@^2.18.1, moment@2.x.x:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -4109,7 +4109,7 @@ node-pre-gyp@^0.6.29, node-pre-gyp@~0.6.31:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-node-slackr:
+node-slackr, node-slackr@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/node-slackr/-/node-slackr-0.1.4.tgz#625da8ac93c00f251b7ad6d713d6009e75ffa3ca"
   dependencies:
@@ -5259,6 +5259,16 @@ shipit-shared:
     shipit-utils "^1.0.2"
     sprintf-js "^1.0.2"
 
+shipit-slack:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/shipit-slack/-/shipit-slack-0.0.1.tgz#b0a46c62102b0c24e5d91be1aa3bc42289073ba2"
+  dependencies:
+    chalk "^0.5.1"
+    moment "^2.18.1"
+    node-slackr "^0.1.4"
+    shipit-utils "^1.1.3"
+    underscore.string "^3.3.4"
+
 shipit-utils@^1.0.2, shipit-utils@^1.1.3:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/shipit-utils/-/shipit-utils-1.4.0.tgz#f963d7f104693711345a8b6ab9b913a2ee343c4c"
@@ -5831,7 +5841,7 @@ undefsafe@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-0.0.3.tgz#ecca3a03e56b9af17385baac812ac83b994a962f"
 
-underscore.string:
+underscore.string, underscore.string@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.4.tgz#2c2a3f9f83e64762fdc45e6ceac65142864213db"
   dependencies:

@@ -1,9 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
+
+const env = require('./config/env')
+const webhookUrl = process.env.SLACK_WEBHOOK || env.slack.webhook
+const channel = process.env.SLACK_CHANNEL || env.slack.channel
+
 module.exports = (shipit) => {
   require('./node_modules/shipit-deploy')(shipit)
   require('./node_modules/shipit-pm2')(shipit)
   require('./node_modules/shipit-npm')(shipit)
   require('./node_modules/shipit-shared')(shipit)
+  require('./node_modules/shipit-slack')(shipit)
 
   shipit.initConfig({
     default: {
@@ -24,6 +30,12 @@ module.exports = (shipit) => {
           'config/env.json',
           'app.json'
         ]
+      },
+      slack: {
+        webhookUrl,
+        message: 'Deploy complete',
+        channel: '#aristoto',
+        status: 'good'
       }
     },
     staging: {
@@ -48,12 +60,7 @@ module.exports = (shipit) => {
     const command = 'rm -r tmp'
     shipit.local(command)
   })
-  shipit.blTask('notify-slack', () => {
-    const command = `node slack.js ${shipit.environment}`
-    shipit.local(command)
-  })
   shipit.on('deployed', () => {
     shipit.start('clean-up')
-    shipit.start('notify-slack')
   })
 }

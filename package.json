@@ -97,6 +97,7 @@
     "shipit-npm": "^0.2.0",
     "shipit-pm2": "^0.0.4",
     "shipit-shared": "^4.4.2",
+    "shipit-slack": "^0.0.1",
     "sqlite": "^2.5.0",
     "underscore.string": "^3.3.4"
   }
