@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
-
 const env = require('./config/env')
+
 const webhookUrl = process.env.SLACK_WEBHOOK || env.slack.webhook
 const channel = process.env.SLACK_CHANNEL || env.slack.channel
 
@@ -33,8 +33,8 @@ module.exports = (shipit) => {
       },
       slack: {
         webhookUrl,
+        channel,
         message: 'Deploy complete',
-        channel: '#aristoto',
         status: 'good'
       }
     },
