@@ -1,6 +1,6 @@
+const Prediction  = require('./Prediction')
 const Sequelize   = require('sequelize')
 const database    = require('../databaseConnection')
-const Prediction  = require('./Prediction')
 
 const Round = database.define('rounds',
   {

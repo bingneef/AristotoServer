@@ -1,4 +1,4 @@
-const Prediction  = require('../models').Prediction
+const Prediction            = require('../models').Prediction
 const PredictionSerializer  = require('../serializers/PredictionSerializer')
 
 const predictionParams = (body) => {

@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const database = require('../databaseConnection');
+const database          = require('../databaseConnection');
+const Sequelize         = require('sequelize');
 const SequelizeTokenify = require('sequelize-tokenify');
 
 const User = database.define('users',

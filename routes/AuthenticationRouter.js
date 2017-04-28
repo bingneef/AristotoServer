@@ -1,6 +1,6 @@
-const AuthenticationHelper = require('../helpers/AuthenticationHelper')
-const AuthenticationController = require('../controllers/AuthenticationController')
-const Router = require('koa-router')
+const AuthenticationController  = require('../controllers/AuthenticationController')
+const AuthenticationHelper      = require('../helpers/AuthenticationHelper')
+const Router                    = require('koa-router')
 
 const AuthenticationRouter = new Router(
   {

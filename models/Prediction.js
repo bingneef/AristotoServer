@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const database = require('../databaseConnection')
+const database  = require('../databaseConnection')
 
 const Prediction = database.define('predictions',
   {

@@ -1,5 +1,5 @@
+const database  = require('../databaseConnection')
 const Sequelize = require('sequelize')
-const database = require('../databaseConnection')
 
 const Team = database.define('teams',
   {

@@ -29,8 +29,10 @@ app.use(async (ctx, next) => {
     if (process.env.NODE_ENV === 'production') {
       if ((err > 499 && err < 600) || (err.status > 499 && err.status < 600)) {
         Raven.captureException(err, (error, eventId) => {
-          console.log(JSON.stringify(error)) // eslint-disable-line no-console
-          console.log(`Reported error ${eventId}`) // eslint-disable-line no-console
+          /* eslint-disable no-console */
+          console.log(JSON.stringify(error))
+          console.log(`Reported error ${eventId}`)
+          /* eslint-enable no-console */
         })
       }
     }
@@ -43,12 +45,13 @@ app.use(convert(views(path.join(__dirname, '/views'), { extension: 'jade' })));
 app.use(logger())
 app.use(koaBody({
   onerror: (err, ctx) => {
-    console.log(JSON.stringify(err)) // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log(JSON.stringify(err))
     ctx.throw('MALFORMED_REQUEST', 422)
   }
 }))
-app.use(OauthRouter.routes());
 app.use(cors())
+app.use(OauthRouter.routes());
 app.use(StatusRouter.routes())
 app.use(AuthenticationRouter.routes())
 app.use(TeamRouter.routes())
@@ -58,9 +61,11 @@ app.use(PredictionRouter.routes())
 if (!module.parent) {
   const port = process.env.PORT || 5000
   app.listen(port)
-  console.log(`Server running. Listening on port ${port}.`) // eslint-disable-line no-console
-  console.log(`Version: ${constants.version}`) // eslint-disable-line no-console
-  console.log(`Environment: ${(process.env.NODE_ENV || 'dev')}`) // eslint-disable-line no-console
+  /* eslint-disable no-console */
+  console.log(`Server running. Listening on port ${port}.`)
+  console.log(`Version: ${constants.version}`)
+  console.log(`Environment: ${(process.env.NODE_ENV || 'dev')}`)
+  /* eslint-enable no-console */
 }
 
 module.exports = app

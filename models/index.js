@@ -1,9 +1,9 @@
-const User = require('./User.js')
-const Oauth = require('./Oauth.js')
-const Team = require('./Team.js')
-const Match = require('./Match.js')
-const Round = require('./Round.js')
-const Prediction = require('./Prediction.js')
+const Match       = require('./Match.js')
+const Oauth       = require('./Oauth.js')
+const Prediction  = require('./Prediction.js')
+const Round       = require('./Round.js')
+const Team        = require('./Team.js')
+const User        = require('./User.js')
 
 // Match
 Match.belongsTo(Round)

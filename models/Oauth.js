@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
 const database  = require('../databaseConnection')
+const Sequelize = require('sequelize')
 const User      = require('./User')
 
 const setUserData = async (user, firstName, lastName, avatarUrl, done) => {

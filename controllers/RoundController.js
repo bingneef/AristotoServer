@@ -1,9 +1,9 @@
-const Round            = require('../models').Round
 const Match            = require('../models').Match
-const Team             = require('../models').Team
-const Prediction       = require('../models').Prediction
-const RoundSerializer  = require('../serializers/RoundSerializer')
 const MatchSerializer  = require('../serializers/MatchSerializer')
+const Prediction       = require('../models').Prediction
+const Round            = require('../models').Round
+const RoundSerializer  = require('../serializers/RoundSerializer')
+const Team             = require('../models').Team
 
 class RoundController {
   static async getRounds (ctx) {
