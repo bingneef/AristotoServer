@@ -1,5 +1,5 @@
 const scheme = {
-  exclude: ['visible', '@fk', '@auto'],
+  exclude: ['@fk', '@auto'],
 };
 
 module.exports = scheme

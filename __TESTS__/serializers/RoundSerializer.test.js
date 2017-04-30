@@ -20,7 +20,6 @@ test('Scheme', async () => {
   )
   expect(RoundSerializer.exclude).toEqual(
     [
-      'visible',
       '@fk',
       '@auto'
     ]
@@ -31,6 +30,6 @@ test('Round json', async () => {
   const team = await RoundFactory.create()
   const serializedRound = team.serialize(RoundSerializer)
   expect(Object.keys(serializedRound)).toEqual(
-    ['id', 'value']
+    ['id', 'state', 'value']
   )
 })

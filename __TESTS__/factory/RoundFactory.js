@@ -4,14 +4,9 @@ const Round = require('../../models').Round
 
 class RoundFactory {
   static params (override) {
-    let visible = override.visible
-    if (visible === undefined) {
-      visible = true
-    }
-
     return {
       value: override.value || faker.random.number(),
-      visible
+      state: override.state || 'preparing'
     }
   }
 

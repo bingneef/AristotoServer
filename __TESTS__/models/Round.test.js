@@ -28,7 +28,7 @@ describe('Database properties', () => {
     expect(Object.keys(Round.attributes)).toEqual(
       [
         'id',
-        'visible',
+        'state',
         'value',
         'createdAt',
         'updatedAt'
@@ -41,24 +41,26 @@ describe('#defaultScope', async () => {
   let a
   let b
   let c
+  let d
 
   beforeEach(async (done) => {
-    a = await RoundFactory.create()
-    b = await RoundFactory.create()
-    c = await RoundFactory.create({ visible: false })
+    a = await RoundFactory.create({ state: 'preparing' })
+    b = await RoundFactory.create({ state: 'published' })
+    c = await RoundFactory.create({ state: 'finished' })
+    d = await RoundFactory.create({ state: 'invalid' })
     done()
   })
 
-  test('visible: true', async () => {
+  test('state', async () => {
     const rounds = await Round.findAll({ attributes: ['id'] })
     expect(rounds.length).toEqual(2)
-    expect(rounds.map(round => round.id)).toEqual([a.id, b.id])
+    expect(rounds.map(round => round.id)).toEqual([b.id, c.id])
   })
 
   test('unscoped', async () => {
     const rounds = await Round.unscoped().findAll({ attributes: ['id'] })
-    expect(rounds.length).toEqual(3)
-    expect(rounds.map(round => round.id)).toEqual([a.id, b.id, c.id])
+    expect(rounds.length).toEqual(4)
+    expect(rounds.map(round => round.id)).toEqual([a.id, b.id, c.id, d.id])
   })
 })
 

@@ -35,7 +35,7 @@ describe('#getRound', () => {
   })
 
   test('RoundHelper sets round to ctx.state.currentRound', async () => {
-    const a = await RoundFactory.create()
+    const a = await RoundFactory.create({ state: 'published' })
     ctx.params = {
       id: a.id
     }

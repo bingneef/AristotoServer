@@ -13,8 +13,9 @@ const Round = database.define('rounds',
       primaryKey: true,
       autoIncrement: true
     },
-    visible: {
-      type: Sequelize.BOOLEAN
+    state: {
+      type: Sequelize.ENUM('home', 'draw', 'away'),
+      allowNull: false
     },
     value: {
       type: Sequelize.INTEGER
@@ -23,7 +24,14 @@ const Round = database.define('rounds',
   {
     defaultScope: {
       where: {
-        visible: true
+        $or: [
+          {
+            state: 'published'
+          },
+          {
+            state: 'finished'
+          }
+        ]
       }
     },
     classMethods: {

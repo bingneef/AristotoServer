@@ -22,8 +22,8 @@ beforeEach(async (done) => {
 
 describe('#getRounds', () => {
   it('returns an serialized array of rounds', async () => {
-    const a = await RoundFactory.create()
-    const b = await RoundFactory.create()
+    const a = await RoundFactory.create({ state: 'published' })
+    const b = await RoundFactory.create({ state: 'finished' })
     const ctx = {}
 
     await RoundController.getRounds(ctx)
@@ -35,8 +35,8 @@ describe('#getRounds', () => {
 
 describe('#getMatches', () => {
   it('returns an serialized array of matches for the round', async () => {
-    const a = await RoundFactory.create()
-    const b = await RoundFactory.create()
+    const a = await RoundFactory.create({ state: 'published' })
+    const b = await RoundFactory.create({ state: 'finished' })
 
     let matchA = await MatchFactory.create({ roundId: a.id })
     let matchB = await MatchFactory.create({ roundId: a.id })
