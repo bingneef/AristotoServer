@@ -1,5 +1,9 @@
 const Prediction  = require('./Prediction')
+const User        = require('./User')
+const RoundScore  = require('./RoundScore')
+const Match       = require('./Match')
 const Sequelize   = require('sequelize')
+const groupArray = require('group-array')
 const database    = require('../databaseConnection')
 
 const Round = database.define('rounds',
@@ -42,6 +46,89 @@ const Round = database.define('rounds',
       }
     },
     instanceMethods: {
+      async getPredictions () {
+        const matchIds = await this.getMatches({
+          attributes: ['id']
+        }).map(match => match.id)
+
+        const predictions = await Prediction.findAll({
+          where: {
+            matchId: {
+              $in: matchIds
+            }
+          },
+          include: [
+            {
+              model: User,
+              attributes: ['id']
+            },
+            {
+              model: Match
+            }
+          ]
+        })
+
+        return predictions
+      },
+      async calculateScores () {
+        const predictions = await this.getPredictions()
+        const groupedPredictions = groupArray(predictions, 'userId')
+
+        // eslint-disable-next-line guard-for-in
+        for (const key in groupedPredictions) {
+          let correctPredictions = 0
+          let wrongPredictions = 0
+
+          const userPredictions = groupedPredictions[key]
+          const user = userPredictions[0].user
+
+          for (const prediction of userPredictions) {
+            let correct = false
+            let invalidValue = false
+
+            switch (prediction.value) {
+              case 'home':
+                if (prediction.match.homeScore > prediction.match.awayScore) {
+                  correct = true
+                }
+                break;
+              case 'draw':
+                if (prediction.match.homeScore === prediction.match.awayScore) {
+                  correct = true
+                }
+                break;
+              case 'away':
+                if (prediction.match.homeScore < prediction.match.awayScore) {
+                  correct = true
+                }
+                break;
+              default:
+                invalidValue = true
+            }
+
+            if (!invalidValue) {
+              if (correct) {
+                correctPredictions += 1
+              } else {
+                wrongPredictions += 1
+              }
+            }
+          }
+
+          const value = RoundScore.calculateScore(correctPredictions, wrongPredictions)
+
+          /* eslint-disable no-await-in-loop */
+          const roundScore = await RoundScore.create({
+            roundId: this.id,
+            value
+          })
+
+          await user.setRoundScores([roundScore])
+          /* eslint-enable no-await-in-loop */
+        }
+
+        await RoundScore.cleanUp()
+      },
       async setPredictions (ctx) {
         const validMatchIds = await this.getMatches(
           {

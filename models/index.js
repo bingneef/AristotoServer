@@ -2,6 +2,7 @@ const Match       = require('./Match.js')
 const Oauth       = require('./Oauth.js')
 const Prediction  = require('./Prediction.js')
 const Round       = require('./Round.js')
+const RoundScore  = require('./RoundScore.js')
 const Team        = require('./Team.js')
 const User        = require('./User.js')
 
@@ -13,6 +14,7 @@ Match.belongsTo(Team, {
 Match.hasMany(Prediction, {
   onDelete: 'cascade',
 })
+
 // Oauth
 Oauth.belongsTo(User)
 
@@ -22,6 +24,19 @@ Prediction.belongsTo(User)
 
 // Round
 Round.hasMany(Match, {
+  onDelete: 'cascade',
+})
+
+// Round
+Round.hasMany(RoundScore, {
+  onDelete: 'cascade',
+})
+
+// RoundScore
+RoundScore.belongsTo(Round, {
+  onDelete: 'cascade',
+})
+RoundScore.belongsTo(User, {
   onDelete: 'cascade',
 })
 
@@ -38,6 +53,9 @@ User.hasMany(Oauth, {
 User.hasMany(Prediction, {
   onDelete: 'cascade',
 })
+User.hasMany(RoundScore, {
+  onDelete: 'cascade',
+})
 
 module.exports = {
   User,
@@ -45,5 +63,6 @@ module.exports = {
   Match,
   Oauth,
   Prediction,
-  Round
+  Round,
+  RoundScore
 }

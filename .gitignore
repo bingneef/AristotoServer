@@ -8,3 +8,5 @@ config/env.json
 config/config.json
 
 coverage/
+
+__TEMP__

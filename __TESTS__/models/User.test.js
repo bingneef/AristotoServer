@@ -8,7 +8,7 @@ describe('Database properties', () => {
   });
 
   test('associations', () => {
-    expect(Object.keys(User.associations)).toEqual(['oauths', 'predictions'])
+    expect(Object.keys(User.associations)).toEqual(['oauths', 'predictions', 'roundScores'])
   })
 
   test('attributes', () => {

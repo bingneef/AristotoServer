@@ -1,8 +1,10 @@
 /* eslint-env node, jest */
+/* eslint-disable no-await-in-loop */
+
 const sequelize     = require('../../databaseConnection')
 const Round         = require('../../models').Round
 const RoundFactory  = require('../factory/RoundFactory')
-
+const RoundScore         = require('../../models').RoundScore
 const UserFactory       = require('../factory/UserFactory')
 const MatchFactory      = require('../factory/MatchFactory')
 const PredictionFactory = require('../factory/PredictionFactory')
@@ -19,7 +21,7 @@ beforeEach(async (done) => {
 
 describe('Database properties', () => {
   test('associations', () => {
-    expect(Object.keys(Round.associations)).toEqual(['matches'])
+    expect(Object.keys(Round.associations)).toEqual(['matches', 'roundScores'])
   })
 
   test('attributes', () => {
@@ -120,6 +122,153 @@ describe('#generatePredictionParams', async () => {
         value: 'home'
       }
     )
+  })
+})
+
+describe('#calculateScores', async () => {
+  let currentRound
+  let userA
+  let matchA
+  let matchB
+  let matchC
+  let matchD
+  let matchE
+
+  beforeEach(async (done) => {
+    RoundScore.calculateScore = jest.fn();
+    RoundScore.calculateScore.mockReturnValue(5)
+    currentRound = await RoundFactory.create()
+    userA = await UserFactory.create()
+    matchA = await MatchFactory.create({ roundId: currentRound.id, homeScore: 2, awayScore: 1 })
+    matchB = await MatchFactory.create({ roundId: currentRound.id, homeScore: 1, awayScore: 1 })
+    matchC = await MatchFactory.create({ roundId: currentRound.id, homeScore: 0, awayScore: 1 })
+    matchD = await MatchFactory.create({ roundId: currentRound.id, homeScore: 1, awayScore: 1 })
+    matchE = await MatchFactory.create({ roundId: currentRound.id, homeScore: 2, awayScore: 2 })
+
+    const userAPredictions = [
+      {
+        matchId: matchA.id,
+        value: 'home'
+      },
+      {
+        matchId: matchB.id,
+        value: 'draw'
+      },
+      {
+        matchId: matchC.id,
+        value: 'away'
+      },
+      {
+        matchId: matchD.id,
+        value: 'home'
+      },
+      {
+        matchId: matchE.id,
+        value: 'home'
+      }
+    ]
+
+    for (const prediction of userAPredictions) {
+      await PredictionFactory.create(
+        {
+          userId: userA.id,
+          matchId: prediction.matchId,
+          value: prediction.value
+        }
+      )
+    }
+
+    done()
+  })
+
+  it('calculates the score for the current round', async () => {
+    await currentRound.calculateScores()
+
+    expect(RoundScore.calculateScore.mock.calls[0]).toEqual([3, 2])
+    const roundScores = await RoundScore.findAll({
+      where: {
+        roundId: currentRound.id,
+        userId: userA.id
+      }
+    })
+
+    expect(roundScores.length).toEqual(1)
+    expect(roundScores[0].value).toEqual(5)
+  })
+
+  it('ignore invalid values for value', async () => {
+    const matchF = await MatchFactory.create(
+      {
+        roundId: currentRound.id,
+        homeScore: 2,
+        awayScore: 2
+      }
+    )
+    await PredictionFactory.create(
+      {
+        userId: userA.id,
+        matchId: matchF.id,
+        value: 'bogus'
+      }
+    )
+
+    await currentRound.calculateScores()
+
+    expect(RoundScore.calculateScore.mock.calls[0]).toEqual([3, 2])
+  })
+})
+
+describe('#getPredictions', async () => {
+  let currentUser
+  let currentRound
+  let matchA
+  let matchB
+  let predictionA
+  let predictionB
+
+  beforeEach(async (done) => {
+    currentUser = await UserFactory.create()
+    currentRound = await RoundFactory.create()
+    matchA = await MatchFactory.create({ roundId: currentRound.id, homeScore: 1, awayScore: 1 })
+    matchB = await MatchFactory.create({ roundId: currentRound.id })
+    predictionA = await PredictionFactory.create(
+      {
+        userId: currentUser.id,
+        matchId: matchA.id,
+        value: 'home'
+      }
+    )
+    predictionB = await PredictionFactory.create(
+      {
+        userId: currentUser.id,
+        matchId: matchB.id,
+        value: 'away'
+      }
+    )
+    done()
+  })
+
+  it('returns the predictions for the round', async () => {
+    const otherRound = await RoundFactory.create()
+    const otherMatch = await MatchFactory.create({ roundId: otherRound.id })
+    await PredictionFactory.create(
+      {
+        userId: currentUser.id,
+        matchId: otherMatch.id,
+        value: 'home'
+      }
+    )
+
+    const predictions = await currentRound.getPredictions()
+    const predictionIds = predictions.map(prediction => prediction.id)
+    expect(predictionIds).toEqual([predictionA.id, predictionB.id])
+  })
+
+  it('includes the match.home/awayScore and user.id in the returned value', async () => {
+    const predictions = await currentRound.getPredictions()
+    expect(predictions[0].match.homeScore).toBeTruthy()
+    expect(predictions[0].match.awayScore).toBeTruthy()
+    expect(predictions[0].user).toBeTruthy()
   })
 })
 
@@ -267,4 +416,3 @@ describe('#setPredictions', () => {
     expect(predictions.length).toEqual(0)
   })
 })
-

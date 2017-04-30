@@ -1,9 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('app-module-path').addPath(__dirname);
-const app   = require('./app');
-const models   = require('./models');
-const repl  = require('repl');
-// eslint-disable-next-line import/no-extraneous-dependencies
-const babel = require('./node_modules/babel-core')
+const app     = require('./app');
+const models  = require('./models');
+const reload  = require('require-reload')(require)
+const repl    = require('repl');
+const babel   = require('babel-core')
 
 const preprocess = (input) => {
   const awaitMatcher = /^(?:\s*(?:(?:let|var|const)\s)?\s*([^=]+)=\s*|^\s*)(await\s[\s\S]*)/;
@@ -39,3 +40,4 @@ replInstance.eval = (cmd, context, filename, callback) => {
 
 replInstance.context.app = app;
 replInstance.context.models = models;
+replInstance.context.reload = reload;
